@@ -4,57 +4,55 @@ from controller import Robot, Keyboard
 robot = Robot()
 timestep = int(robot.getBasicTimeStep())
 
-# 2. Haal de motoren op (namen moeten matchen met je PROTO/URDF)
+# 2. Haal de motoren op
 left_motor = robot.getDevice('left_wheel_motor')
 right_motor = robot.getDevice('right_wheel_motor')
 
-# 3. Stel de motoren in op 'Velocity Mode'
-# Door de positie op oneindig (inf) te zetten, kunnen de wielen blijven draaien
+# Zet motoren in velocity mode
 left_motor.setPosition(float('inf'))
 right_motor.setPosition(float('inf'))
-
-# Start met snelheid 0 (stilstand)
 left_motor.setVelocity(0.0)
 right_motor.setVelocity(0.0)
 
-# 4. Activeer het toetsenbord
+# ==========================================
+# 3. CAMERA INSTELLEN (Nieuw!)
+# ==========================================
+# De naam 'camera' moet overeenkomen met de naam in je PROTO bestand
+camera = robot.getDevice('camera')
+
+# Zet de camera aan. Hij maakt elke 'timestep' een nieuwe foto.
+camera.enable(timestep)
+
+# ==========================================
+
+# 4. Toetsenbord en variabelen
 keyboard = Keyboard()
 keyboard.enable(timestep)
-
-# Snelheid instelling (max is 15 volgens je URDF)
 MAX_SPEED = 5.0 
 
-print("Controller gestart! Gebruik de pijltjestoetsen om te rijden.")
+print("Klaar! Camera is actief. Gebruik pijltjestoetsen om te rijden.")
 
 # 5. De Main Loop
 while robot.step(timestep) != -1:
-    # Lees welke toets wordt ingedrukt
-    key = keyboard.getKey()
+    # Hier kun je eventueel de camera-data ophalen om er iets mee te doen:
+    # image = camera.getImage()
     
+    key = keyboard.getKey()
     left_speed = 0.0
     right_speed = 0.0
     
-    # Besturing logica
     if key == Keyboard.UP:
-        # Vooruit: beide wielen vooruit
         left_speed = MAX_SPEED
         right_speed = MAX_SPEED
-        
     elif key == Keyboard.DOWN:
-        # Achteruit: beide wielen achteruit
         left_speed = -MAX_SPEED
         right_speed = -MAX_SPEED
-        
     elif key == Keyboard.LEFT:
-        # Links draaien: links achteruit, rechts vooruit
         left_speed = -MAX_SPEED * 0.5
         right_speed = MAX_SPEED * 0.5
-        
     elif key == Keyboard.RIGHT:
-        # Rechts draaien: links vooruit, rechts achteruit
         left_speed = MAX_SPEED * 0.5
         right_speed = -MAX_SPEED * 0.5
         
-    # Stuur de snelheden naar de motoren
     left_motor.setVelocity(left_speed)
     right_motor.setVelocity(right_speed)
