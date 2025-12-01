@@ -1,0 +1,53 @@
+# -------------------------
+# Webots standaard bestanden
+# -------------------------
+
+# Webots cache en tijdelijke folders
+cache/
+tmp/
+.scratch/
+.wbproj.*
+
+# Automatisch gegenereerde bestanden
+*.log
+*.bak
+*.tmp
+
+# Controllers build outputs (C/C++, Python bytecode, ROS, etc.)
+controllers/*/*.o
+controllers/*/*.a
+controllers/*/*.so
+controllers/*/*.dll
+controllers/*/*.exe
+controllers/*/__pycache__/
+controllers/*/*.pyc
+
+# Controllers build folders (optioneel)
+controllers/*/build/
+controllers/*/cmake-build-*/
+
+# ROS / Catkin / Colcon
+devel/
+build/
+install/
+log/
+
+# Python virtual environments
+venv/
+.venv/
+
+# VSCode / JetBrains
+.vscode/
+.idea/
+
+# OS-specifieke rommel
+.DS_Store
+Thumbs.db
+
+# Node/JS tooling (indien gebruikt)
+node_modules/
+dist/
+
+# -------------------------
+# Einde
+# -------------------------
