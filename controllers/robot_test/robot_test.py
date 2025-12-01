@@ -1,58 +1,72 @@
-from controller import Robot, Keyboard
+from controller import Robot
 
-# 1. Initialiseer de robot
+# 1. Initialiseer Robot
 robot = Robot()
 timestep = int(robot.getBasicTimeStep())
 
-# 2. Haal de motoren op
+# 2. Motoren instellen
 left_motor = robot.getDevice('left_wheel_motor')
 right_motor = robot.getDevice('right_wheel_motor')
 
-# Zet motoren in velocity mode
 left_motor.setPosition(float('inf'))
 right_motor.setPosition(float('inf'))
 left_motor.setVelocity(0.0)
 right_motor.setVelocity(0.0)
 
 # ==========================================
-# 3. CAMERA INSTELLEN (Nieuw!)
+# 3. LIDAR & CAMERA INSTELLEN
 # ==========================================
-# De naam 'camera' moet overeenkomen met de naam in je PROTO bestand
+# Camera aanzetten (voor het geval je die ook wilt zien)
 camera = robot.getDevice('camera')
-
-# Zet de camera aan. Hij maakt elke 'timestep' een nieuwe foto.
 camera.enable(timestep)
 
+# Lidar aanzetten
+lidar = robot.getDevice('lidar')
+lidar.enable(timestep)
+
+# Optioneel: Zet PointCloud aan (helpt soms bij visualisatie)
+lidar.enablePointCloud()
+
 # ==========================================
 
-# 4. Toetsenbord en variabelen
-keyboard = Keyboard()
-keyboard.enable(timestep)
-MAX_SPEED = 5.0 
+print("Lidar Test Gestart! Robot rijdt autonoom.")
 
-print("Klaar! Camera is actief. Gebruik pijltjestoetsen om te rijden.")
+MAX_SPEED = 5.0
 
-# 5. De Main Loop
 while robot.step(timestep) != -1:
-    # Hier kun je eventueel de camera-data ophalen om er iets mee te doen:
-    # image = camera.getImage()
+    # 4. LEES LIDAR DATA
+    # getRangeImage() geeft een lijst terug met 720 getallen (afstanden)
+    # index 0 is recht vooruit (omdat Lidar naar +X kijkt)
+    range_image = lidar.getRangeImage()
     
-    key = keyboard.getKey()
-    left_speed = 0.0
-    right_speed = 0.0
+    # Veiligheidscheck: soms is de lijst nog leeg bij de eerste stap
+    if not range_image:
+        continue
+
+    # We kijken naar wat er RECHT VOOR ons is (index 0)
+    # We pakken ook een paar graden links en rechts voor de zekerheid
+    # (Bijv. het gemiddelde van de eerste 10 en laatste 10 punten)
+    front_distance = range_image[0] 
     
-    if key == Keyboard.UP:
-        left_speed = MAX_SPEED
-        right_speed = MAX_SPEED
-    elif key == Keyboard.DOWN:
-        left_speed = -MAX_SPEED
-        right_speed = -MAX_SPEED
-    elif key == Keyboard.LEFT:
-        left_speed = -MAX_SPEED * 0.5
-        right_speed = MAX_SPEED * 0.5
-    elif key == Keyboard.RIGHT:
+    # Debug: Print de afstand in de console
+    # "inf" betekent oneindig (geen obstakel gezien)
+    print(f"Afstand tot muur: {front_distance:.2f} meter")
+
+    # 5. OBSTAKEL LOGICA
+    left_speed = MAX_SPEED
+    right_speed = MAX_SPEED
+    
+    # Als er iets dichterbij is dan 30 cm (0.3 meter)
+    if front_distance < 0.3:
+        print("Obstakel! Draaien...")
+        # Draai naar rechts
         left_speed = MAX_SPEED * 0.5
         right_speed = -MAX_SPEED * 0.5
+    else:
+        # Gewoon rechtdoor
+        left_speed = MAX_SPEED
+        right_speed = MAX_SPEED
         
+    # Stuur motoren aan
     left_motor.setVelocity(left_speed)
     right_motor.setVelocity(right_speed)
