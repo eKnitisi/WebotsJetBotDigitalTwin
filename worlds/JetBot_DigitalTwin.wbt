@@ -3,33 +3,554 @@
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
-EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/robots/nvidia/jetbot/protos/JetBot.proto"
 
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.5773502691896257 0.5773502691896257 0.5773502691896257 2.0944
-  position -2.3036649486124802e-05 -2.303671462524614e-05 1.8530201887847497
-}
-JetBot {
-  hidden position_0_0 0.6397817188615923
-  hidden position_0_1 0.6397817170727997
-  hidden linearVelocity_0 3.092005221136967e-05 5.2767788267636866e-08 1.4731803266821643e-06
-  hidden angularVelocity_0 4.1165972995565e-08 3.2133475585613784e-05 1.1275821318037918e-06
-  hidden translation_6 0.030000324392156757 0.0521500000157608 0.030000424421836418
-  hidden rotation_6 0.29998057549684476 0.2999794716775918 0.9055517494304866 1.669848481791667
-  hidden linearVelocity_6 3.242352499577304e-05 -6.560750232243598e-09 -6.175741149254282e-07
-  hidden angularVelocity_6 -2.4702604764972436e-06 2.000031705657704 2.2554927248066623e-05
-  hidden translation_7 0.030000328262487292 -0.05949999998422251 0.030000429544416077
-  hidden rotation_7 0.2999804754454372 0.29998047552942203 0.9055514500306823 1.6698451488269115
-  hidden linearVelocity_7 3.267701794066869e-05 1.4552186312786797e-07 -6.533190438653184e-07
-  hidden angularVelocity_7 -2.4682204898191758e-06 2.0000317012725817 2.2551044663345445e-05
-  translation 9.399628207108074e-06 9.140065870258454e-08 -0.00033795078212214835
-  rotation 0.002669467278449728 -0.9999963878851318 0.000313306779435535 0.004008664478936122
+  orientation 0.11382187979423433 0.04513265610288462 -0.9924755024851775 2.2075323821844806
+  position 0.37815272786600834 0.4924182306006688 0.2236775279191166
 }
 TexturedBackground {
 }
 TexturedBackgroundLight {
 }
 RectangleArena {
+}
+Robot {
+  translation 0.03318834964854889 0.09476460136372288 -0.00043938418043044936
+  rotation -2.879082219738126e-09 3.6731953842656635e-09 -1 1.811860962469091
+  children [
+    Solid {
+      translation 0 0 0.045
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.05 0.05 0.05
+            roughness 0.2
+            metalness 0.9
+          }
+          geometry Box {
+            size 0.14 0.11 0.002
+          }
+        }
+      ]
+      name "solid(1)"
+      boundingObject Box {
+        size 0.14 0.11 0.002
+      }
+      physics Physics {
+        mass 0.2
+      }
+    }
+    Pose {
+      translation 0.06 0.05 0.065
+      children [
+        DEF STANDOFF Shape {
+          appearance PBRAppearance {
+            baseColor 0.8 0.6 0.2
+          }
+          geometry Cylinder {
+            height 0.04
+            radius 0.003
+          }
+        }
+      ]
+    }
+    Pose {
+      translation 0.06 -0.05 0.065
+      children [
+        USE STANDOFF
+      ]
+    }
+    Pose {
+      translation -0.06 0.05 0.065
+      children [
+        USE STANDOFF
+      ]
+    }
+    Pose {
+      translation -0.06 -0.05 0.065
+      children [
+        USE STANDOFF
+      ]
+    }
+    Solid {
+      translation 0 0 0.085
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.05 0.05 0.05
+            roughness 0.2
+            metalness 0.9
+          }
+          geometry Box {
+            size 0.14 0.11 0.002
+          }
+        }
+      ]
+      boundingObject Box {
+        size 0.14 0.11 0.002
+      }
+      physics Physics {
+        mass 0.1
+      }
+    }
+    Pose {
+      translation -0.05 -3.67318e-08 0.065
+      rotation 0 0 1 1.5708
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.1 0.2 0.9
+            metalness 0.1
+          }
+          geometry Cylinder {
+            height 0.04
+            radius 0.018
+          }
+        }
+        Pose {
+          translation 0 -0.018 -0.018
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0.1 0.1 0.1
+              }
+              geometry Box {
+                size 0.06 0.01 0.005
+              }
+            }
+          ]
+        }
+      ]
+    }
+    Pose {
+      translation 0.01 0 0.087
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0.35 0
+            roughness 0.6
+          }
+          geometry Box {
+            size 0.1 0.08 0.0015
+          }
+        }
+        Pose {
+          translation 0 0 0.013
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0.75 0.75 0.75
+                metalness 0.9
+              }
+              geometry Box {
+                size 0.06 0.04 0.025
+              }
+            }
+          ]
+        }
+        Pose {
+          translation 0.045 -0.015 0.006
+          children [
+            DEF USB_PORT Shape {
+              appearance PBRAppearance {
+                baseColor 0.8 0.8 0.8
+              }
+              geometry Box {
+                size 0.01 0.015 0.01
+              }
+            }
+          ]
+        }
+        Pose {
+          translation 0.045 0.015 0.006
+          children [
+            USE USB_PORT
+          ]
+        }
+        Pose {
+          translation 0.045 0.035 0.008
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0.8 0.8 0.8
+              }
+              geometry Box {
+                size 0.01 0.02 0.015
+              }
+            }
+          ]
+        }
+      ]
+    }
+    Pose {
+      translation -0.03 0 0.086
+      children [
+        Pose {
+          translation 0 0 0.025
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0.1 0.1 0.1
+              }
+              geometry Cylinder {
+                height 0.05
+                radius 0.01
+              }
+            }
+          ]
+        }
+        Pose {
+          translation 0 0 0.05
+          children [
+            Lidar {
+              children [
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 0.1 0.1 0.1
+                    roughness 0.6
+                  }
+                  geometry Cylinder {
+                    height 0.02
+                    radius 0.03
+                  }
+                }
+                Pose {
+                  translation 0 0 0.025
+                  children [
+                    Shape {
+                      appearance PBRAppearance {
+                        baseColor 0.05 0.05 0.05
+                        roughness 0.5
+                      }
+                      geometry Cylinder {
+                        height 0.02
+                        radius 0.03
+                      }
+                    }
+                    Pose {
+                      translation 0.025 0.005 0
+                      children [
+                        Shape {
+                          appearance PBRAppearance {
+                            baseColor 0.1 0.1 0.8
+                            metalness 0.5
+                            emissiveColor 0 0 0.1
+                          }
+                          geometry Box {
+                            size 0.01 0.01 0.01
+                          }
+                        }
+                      ]
+                    }
+                    Pose {
+                      translation 0.025 -0.005 0
+                      children [
+                        Shape {
+                          appearance PBRAppearance {
+                            baseColor 0.1 0.1 0.8
+                            metalness 0.5
+                          }
+                          geometry Box {
+                            size 0.01 0.01 0.01
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+              horizontalResolution 720
+              fieldOfView 6.28318
+              numberOfLayers 1
+              minRange 0.12
+              maxRange 8
+              type "rotating"
+              noise 0.005
+            }
+          ]
+        }
+      ]
+    }
+    Pose {
+      translation 0.065 0 0.086
+      children [
+        Pose {
+          translation -0.005 0 0.005
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0.1 0.1 0.1
+              }
+              geometry Box {
+                size 0.01 0.03 0.01
+              }
+            }
+          ]
+        }
+        Pose {
+          translation 0 0 0.015
+          children [
+            Camera {
+              rotation 0.5773502691896258 0.5773502691896258 0.5773502691896258 -2.094
+              children [
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 0 0.3 0
+                  }
+                  geometry Box {
+                    size 0.005 0.03 0.03
+                  }
+                }
+                Pose {
+                  translation 0.005 0 0
+                  rotation 0 0 1 1.5708
+                  children [
+                    Shape {
+                      appearance PBRAppearance {
+                        baseColor 0.1 0.1 0.1
+                        roughness 0.1
+                      }
+                      geometry Cylinder {
+                        height 0.01
+                        radius 0.008
+                      }
+                    }
+                  ]
+                }
+              ]
+              fieldOfView 2.79
+              width 1280
+              height 720
+            }
+          ]
+        }
+      ]
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 10.545068826711715
+        axis 0 1 0
+        anchor 0 0.07 0.0325
+      }
+      device [
+        RotationalMotor {
+          name "left_wheel_motor"
+          maxVelocity 15
+          maxTorque 0.5
+        }
+        PositionSensor {
+          name "left_wheel_sensor"
+        }
+      ]
+      endPoint Solid {
+        translation 0 0.075 0.0325
+        rotation 0.4053901704389701 -0.6463960628613306 0.6463984372110081 2.371306367777331
+        children [
+          Shape {
+            appearance PBRAppearance {
+              baseColor 0.95 0.8 0.1
+              roughness 0.4
+              metalness 0.1
+            }
+            geometry Cylinder {
+              height 0.026
+              radius 0.028
+            }
+          }
+          Shape {
+            appearance PBRAppearance {
+              baseColor 0.15 0.15 0.15
+              roughness 0.9
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.025
+              radius 0.0325
+            }
+          }
+          Pose {
+            translation 0 0.014 0
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.7 0.7 0.7
+                }
+                geometry Cylinder {
+                  height 0.005
+                  radius 0.004
+                }
+              }
+            ]
+          }
+        ]
+        name "left wheel"
+        boundingObject Cylinder {
+          height 0.026
+          radius 0.0325
+        }
+        physics Physics {
+          density -1
+          mass 0.06
+        }
+        linearVelocity -8.521100598368014e-10 2.0945793493849286e-10 -4.357999858143355e-14
+        angularVelocity 6.7461439840460525e-12 2.7585131814977684e-11 1.7829763315985141e-13
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 0.9504101120858639
+        axis 0 1 0
+        anchor 0 -0.07 0.0325
+      }
+      device [
+        RotationalMotor {
+          name "right_wheel_motor"
+          maxVelocity 15
+          maxTorque 0.5
+        }
+        PositionSensor {
+          name "right_wheel_sensor"
+        }
+      ]
+      endPoint Solid {
+        translation 0 -0.075 0.0325
+        rotation 0.8085886466336637 0.4160427435545736 -0.41604427176770914 1.7816841946704858
+        children [
+          Shape {
+            appearance PBRAppearance {
+              baseColor 0.95 0.8 0.1
+              roughness 0.4
+              metalness 0.1
+            }
+            geometry Cylinder {
+              height 0.026
+              radius 0.028
+            }
+          }
+          Shape {
+            appearance PBRAppearance {
+              baseColor 0.15 0.15 0.15
+              roughness 0.9
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.025
+              radius 0.0325
+            }
+          }
+          Pose {
+            translation 0 -0.014 0
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.7 0.7 0.7
+                }
+                geometry Cylinder {
+                  height 0.005
+                  radius 0.004
+                }
+              }
+            ]
+          }
+        ]
+        name "right wheel"
+        boundingObject Cylinder {
+          height 0.026
+          radius 0.0325
+        }
+        physics Physics {
+          density -1
+          mass 0.06
+        }
+        linearVelocity 8.52430144871385e-10 -2.0958660855750066e-10 -5.1396004478547133e-14
+        angularVelocity -6.842955317748391e-12 -2.7712162808009892e-11 1.8006716776696644e-13
+      }
+    }
+    Solid {
+      translation -0.057 0 0.01
+      children [
+        Pose {
+          translation 0 0 0.017
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0.5 0.5 0.5
+                metalness 0.8
+              }
+              geometry Cylinder {
+                height 0.034
+                radius 0.012
+              }
+            }
+          ]
+        }
+        DEF CASTER_SHAPE Shape {
+          appearance PBRAppearance {
+            baseColor 0.8 0.8 0.8
+            roughness 0.1
+          }
+          geometry Sphere {
+            radius 0.01
+          }
+        }
+      ]
+      name "rear_caster"
+      boundingObject USE CASTER_SHAPE
+      physics Physics {
+        mass 0.02
+      }
+    }
+    Solid {
+      translation 0.057 0 0.01
+      children [
+        Pose {
+          translation 0 0 0.017
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0.5 0.5 0.5
+                metalness 0.8
+              }
+              geometry Cylinder {
+                height 0.034
+                radius 0.012
+              }
+            }
+          ]
+        }
+        USE CASTER_SHAPE
+      ]
+      name "front_caster"
+      boundingObject USE CASTER_SHAPE
+      physics Physics {
+        mass 0.02
+      }
+    }
+  ]
+  name "JetBot"
+  model "Waveshare JetBot ROS AI Kit"
+  boundingObject Group {
+    children [
+      Pose {
+        translation 0 0 0.06
+        children [
+          Box {
+            size 0.15 0.11 0.08
+          }
+        ]
+      }
+    ]
+  }
+  physics Physics {
+    density -1
+    mass 1.2
+    centerOfMass [
+      0 0 0.05
+    ]
+  }
+  controller "robot_test"
+  linearVelocity -3.266824467007685e-13 1.3403247066523492e-13 9.475133520499622e-14
+  angularVelocity -4.502503551184695e-14 -4.5948771667194285e-14 1.7885198395567443e-13
 }

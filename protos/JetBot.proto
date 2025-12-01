@@ -1,0 +1,218 @@
+#VRML_SIM R2023b utf8
+# License: Apache 2.0
+# Author: Gemini AI
+# Description: High-Fidelity simulatie van de Waveshare JetBot ROS AI Kit.
+# Alle componenten zijn fysiek verbonden en correct geschaald.
+
+PROTO JetBot [
+  field SFVec3f    translation     0 0 0
+  field SFRotation rotation        0 0 1 0
+  field SFString   name            "JetBot"
+  field SFString   controller      "my_controller"
+  field SFString   controllerArgs  ""
+]
+{
+  Robot {
+    translation IS translation
+    rotation IS rotation
+    name IS name
+    controller IS controller
+    controllerArgs IS controllerArgs
+    model "Waveshare JetBot ROS AI Kit"
+    
+    children [
+      # ==========================================
+      # CHASSIS & STRUCTUUR
+      # ==========================================
+      
+      # 1. BODEMPLAAT (Zwart metaal)
+      Solid {
+        translation 0 0 0.045
+        children [
+          Shape { 
+            appearance PBRAppearance { baseColor 0.05 0.05 0.05 metalness 0.9 roughness 0.2 } 
+            geometry Box { size 0.14 0.11 0.002 } 
+          }
+        ]
+        boundingObject Box { size 0.14 0.11 0.002 }
+        physics Physics { mass 0.2 }
+      }
+
+      # 2. STANDOFFS (Koperen paaltjes)
+      Transform { translation 0.06 0.05 0.065 children [ DEF STANDOFF Shape { appearance PBRAppearance { baseColor 0.8 0.6 0.2 metalness 1 } geometry Cylinder { height 0.04 radius 0.003 } } ] }
+      Transform { translation 0.06 -0.05 0.065 children [ USE STANDOFF ] }
+      Transform { translation -0.06 0.05 0.065 children [ USE STANDOFF ] }
+      Transform { translation -0.06 -0.05 0.065 children [ USE STANDOFF ] }
+
+      # 3. TOPPLAAT
+      Solid {
+        translation 0 0 0.085
+        children [
+          Shape { 
+            appearance PBRAppearance { baseColor 0.05 0.05 0.05 metalness 0.9 roughness 0.2 } 
+            geometry Box { size 0.14 0.11 0.002 } 
+          }
+        ]
+        boundingObject Box { size 0.14 0.11 0.002 }
+        physics Physics { mass 0.1 }
+      }
+
+      # ==========================================
+      # COMPONENTEN (Vast gemonteerd)
+      # ==========================================
+
+      # BATTERIJ PACK + HOUDER
+      Transform {
+        translation -0.04 0 0.055
+        rotation 0 0 1 1.5708
+        children [
+          # De batterij
+          Shape { appearance PBRAppearance { baseColor 0.1 0.2 0.9 roughnes 0.4 metalness 0.1 } geometry Cylinder { height 0.07 radius 0.018 } }
+          # De houder (zodat hij niet zweeft)
+          Transform {
+              translation 0 -0.018 -0.008 
+              children [ Shape { appearance PBRAppearance { baseColor 0.1 0.1 0.1 } geometry Box { size 0.06 0.01 0.005 } } ]
+          }
+        ]
+      }
+
+      # JETSON NANO (Vast op de topplaat)
+      Transform {
+        translation 0.01 0 0.087 
+        children [
+          # PCB
+          Shape { appearance PBRAppearance { baseColor 0.0 0.35 0.0 roughness 0.6 } geometry Box { size 0.10 0.08 0.0015 } }
+          # Heatsink
+          Transform {
+            translation 0 0 0.013 
+            children [ Shape { appearance PBRAppearance { baseColor 0.75 0.75 0.75 metalness 0.9 } geometry Box { size 0.06 0.04 0.025 } } ]
+          }
+          # Poorten
+          Transform { translation 0.045 -0.015 0.006 children [ DEF USB_PORT Shape { appearance PBRAppearance { baseColor 0.8 0.8 0.8 metalness 1 } geometry Box { size 0.01 0.015 0.01 } } ] }
+          Transform { translation 0.045 0.015 0.006 children [ USE USB_PORT ] }
+          Transform { translation 0.045 0.035 0.008 children [ Shape { appearance PBRAppearance { baseColor 0.8 0.8 0.8 metalness 1 } geometry Box { size 0.01 0.02 0.015 } } ] }
+        ]
+      }
+
+      # LIDAR + STEUNMAST
+      Transform {
+        translation -0.03 0 0.086 
+        children [
+          # De Mast
+          Transform {
+              translation 0 0 0.025 
+              children [ Shape { appearance PBRAppearance { baseColor 0.1 0.1 0.1 } geometry Cylinder { height 0.05 radius 0.01 } } ]
+          }
+          # De Lidar unit
+          Transform {
+            translation 0 0 0.05 
+            children [
+              Lidar {
+                name "lidar" type "rotating" minRange 0.12 maxRange 8.0 horizontalResolution 720 fieldOfView 6.28318 noise 0.005 rotation 0 0 1 0 numberOfLayers 1
+                children [
+                  # Motorhuis
+                  Shape { appearance PBRAppearance { baseColor 0.1 0.1 0.1 roughness 0.6 } geometry Cylinder { height 0.02 radius 0.03 } }
+                  # Draaiende kop
+                  Transform {
+                    translation 0 0 0.025
+                    children [
+                        Shape { appearance PBRAppearance { baseColor 0.05 0.05 0.05 roughness 0.5 } geometry Cylinder { height 0.02 radius 0.03 } }
+                        # Lenzen
+                        Transform { translation 0.025 0.005 0 children [ Shape { appearance PBRAppearance { baseColor 0.1 0.1 0.8 metalness 0.5 emissiveColor 0 0 0.1 } geometry Box { size 0.01 0.01 0.01 } } ] }
+                        Transform { translation 0.025 -0.005 0 children [ Shape { appearance PBRAppearance { baseColor 0.1 0.1 0.8 metalness 0.5 } geometry Box { size 0.01 0.01 0.01 } } ] }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+
+      # CAMERA + MOUNT
+      Transform {
+        translation 0.065 0 0.086 
+        rotation 0 0 1 0
+        children [
+          # Mount
+          Transform { translation -0.005 0 0.005 children [ Shape { appearance PBRAppearance { baseColor 0.1 0.1 0.1 } geometry Box { size 0.01 0.03 0.01 } } ] }
+          # Camera
+          Transform {
+            translation 0 0 0.015
+            children [
+              Camera {
+                rotation 0.577 0.577 0.577 -2.094 translation 0 0 0 name "camera" fieldOfView 2.79 width 1280 height 720
+                children [
+                  Shape { appearance PBRAppearance { baseColor 0 0.3 0 } geometry Box { size 0.005 0.03 0.03 } }
+                  Transform { translation 0.005 0 0 rotation 0 0 1 1.5708 children [ Shape { appearance PBRAppearance { baseColor 0.1 0.1 0.1 roughness 0.1 } geometry Cylinder { height 0.01 radius 0.008 } } ] }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+
+      # ==========================================
+      # AANDRIJVING
+      # ==========================================
+
+      # HOOFDWIELEN
+      HingeJoint {
+        jointParameters HingeJointParameters { axis 0 1 0 anchor 0 0.07 0.0325 }
+        device [ RotationalMotor { name "left_wheel_motor" maxVelocity 15 maxTorque 0.5 } PositionSensor { name "left_wheel_sensor" } ]
+        endPoint Solid {
+          translation 0.02 0.075 0.0325 rotation 1 0 0 1.5708
+          children [
+            Shape { appearance PBRAppearance { baseColor 0.95 0.8 0.1 roughness 0.4 metalness 0.1 } geometry Cylinder { height 0.026 radius 0.028 } }
+            Shape { appearance PBRAppearance { baseColor 0.15 0.15 0.15 roughness 0.9 metalness 0.0 } geometry Cylinder { height 0.025 radius 0.0325 } }
+            Transform { translation 0 0.014 0 children [ Shape { appearance PBRAppearance { baseColor 0.7 0.7 0.7 metalness 1 } geometry Cylinder { height 0.005 radius 0.004 } }] }
+          ]
+          name "left wheel" boundingObject Cylinder { height 0.026 radius 0.0325 } physics Physics { density -1 mass 0.06 }
+        }
+      }
+      HingeJoint { 
+        jointParameters HingeJointParameters { axis 0 1 0 anchor 0 -0.07 0.0325 }
+        device [ RotationalMotor { name "right_wheel_motor" maxVelocity 15 maxTorque 0.5 } PositionSensor { name "right_wheel_sensor" } ]
+        endPoint Solid {
+          translation 0.02 -0.075 0.0325 rotation 1 0 0 1.5708
+          children [
+            Shape { appearance PBRAppearance { baseColor 0.95 0.8 0.1 roughness 0.4 metalness 0.1 } geometry Cylinder { height 0.026 radius 0.028 } }
+            Shape { appearance PBRAppearance { baseColor 0.15 0.15 0.15 roughness 0.9 metalness 0.0 } geometry Cylinder { height 0.025 radius 0.0325 } }
+            Transform { translation 0 -0.014 0 children [ Shape { appearance PBRAppearance { baseColor 0.7 0.7 0.7 metalness 1 } geometry Cylinder { height 0.005 radius 0.004 } }] }
+          ]
+          name "right wheel" boundingObject Cylinder { height 0.026 radius 0.0325 } physics Physics { density -1 mass 0.06 }
+        }
+      }
+
+      # ZWENKWIELEN (Met behuizing)
+      Solid {
+        translation -0.06 0 0.01
+        children [
+          # Behuizing
+          Transform {
+              translation 0 0 0.01 
+              children [ Shape { appearance PBRAppearance { baseColor 0.5 0.5 0.5 metalness 0.8 } geometry Cylinder { height 0.02 radius 0.012 } } ]
+          }
+          # De kogel
+          DEF CASTER_SHAPE Shape { appearance PBRAppearance { baseColor 0.8 0.8 0.8 metalness 1 roughness 0.1 } geometry Sphere { radius 0.01 } }
+        ]
+        name "rear_caster" boundingObject USE CASTER_SHAPE physics Physics { mass 0.02 }
+      }
+      Solid {
+        translation 0.06 0 0.01
+        children [
+          Transform {
+              translation 0 0 0.01
+              children [ Shape { appearance PBRAppearance { baseColor 0.5 0.5 0.5 metalness 0.8 } geometry Cylinder { height 0.02 radius 0.012 } } ]
+          }
+          USE CASTER_SHAPE
+        ]
+        name "front_caster" boundingObject USE CASTER_SHAPE physics Physics { mass 0.02 }
+      }
+
+    ]
+    # BOUNDING OBJECT (Vereenvoudigd voor performance)
+    boundingObject Group { children [ Transform { translation 0 0 0.06 children [ Box { size 0.15 0.11 0.08 } ] } ] }
+    physics Physics { density -1 mass 1.2 centerOfMass [0 0 0.05] }
+  }
+}
