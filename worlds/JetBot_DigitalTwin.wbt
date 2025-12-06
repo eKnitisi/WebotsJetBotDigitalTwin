@@ -7,8 +7,8 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/project
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.2889471961739723 0.011088887714205072 -0.9572808127150891 3.045099441146794
-  position 2.5944202993064094 0.6729119460990555 1.9240187257265253
+  orientation 0.41017415954249953 -0.02587620217841153 -0.9116400501318633 3.2402659718592695
+  position 1.7211947685004452 -0.17407197701958227 1.7387653779516046
 }
 TexturedBackground {
 }
@@ -18,8 +18,8 @@ RectangleArena {
   wallHeight 0.2
 }
 Robot {
-  translation 0.3060722175711111 -0.001073170681915115 -0.0004393841396107684
-  rotation 1.483238968494154e-08 -1.081076171071388e-08 0.9999999999999999 -1.5522329306386533
+  translation 0.3079581779424473 0.16661877550473608 -0.00043956394431292345
+  rotation 9.39002587493329e-06 2.2100269353992027e-05 0.9999999997117028 -0.7578011778268392
   children [
     Solid {
       translation 0 0 0.045
@@ -206,6 +206,7 @@ Robot {
           translation 0 0 0.05
           children [
             Lidar {
+              rotation 0 0 1 -1.57
               children [
                 Shape {
                   appearance PBRAppearance {
@@ -267,7 +268,6 @@ Robot {
               numberOfLayers 5
               minRange 0.12
               maxRange 8
-              type "rotating"
               noise 0.005
             }
           ]
@@ -331,7 +331,7 @@ Robot {
     }
     HingeJoint {
       jointParameters HingeJointParameters {
-        position 490.4006254455058
+        position 553.9681034836578
         axis 0 1 0
         anchor 0 0.07 0.0325
       }
@@ -347,7 +347,7 @@ Robot {
       ]
       endPoint Solid {
         translation 0 0.075 0.0325
-        rotation 0.9761195877510919 0.15360725417125976 -0.15360781840324542 1.5949678175545972
+        rotation 0.7743829471781039 0.44739779873267965 -0.44739944211957466 1.8237473184775808
         children [
           Shape {
             appearance PBRAppearance {
@@ -395,13 +395,13 @@ Robot {
           density -1
           mass 0.06
         }
-        linearVelocity 0.0030018307878052443 -0.1624582533471795 -1.0070188475950782e-08
-        angularVelocity 4.999137652614549 0.092811209990033 7.292982919553334e-07
+        linearVelocity 0.11801285591414526 -0.11168899178000129 -8.89027233341788e-07
+        angularVelocity 3.436637289254295 3.6319269987860903 0.000259563875988175
       }
     }
     HingeJoint {
       jointParameters HingeJointParameters {
-        position 381.0233293042146
+        position 415.16766407400394
         axis 0 1 0
         anchor 0 -0.07 0.0325
       }
@@ -417,7 +417,7 @@ Robot {
       ]
       endPoint Solid {
         translation 0 -0.075 0.0325
-        rotation -0.31977048219972726 0.6699789329171046 -0.6699813938916601 3.76057998711134
+        rotation 0.9455678170811945 0.23010988060311818 -0.23011072584545725 1.6267404626197164
         children [
           Shape {
             appearance PBRAppearance {
@@ -465,8 +465,8 @@ Robot {
           density -1
           mass 0.06
         }
-        linearVelocity 0.0030034471590216546 -0.16245823238615345 9.61097062663964e-09
-        angularVelocity 4.9991376470311435 0.09281154233830703 4.1760203045139994e-07
+        linearVelocity 0.11802741237808038 -0.11167293176843479 -1.511176749128651e-06
+        angularVelocity 3.436882100290582 3.6316952984786584 -9.474283294924037e-05
       }
     }
     Solid {
@@ -552,6 +552,6 @@ Robot {
     ]
   }
   controller "robot_test"
-  linearVelocity 0.0030026413921497466 -0.16245824359100608 4.2834195852299533e-10
-  angularVelocity 2.573812274614986e-08 1.3578006815537189e-07 2.5525199406668515e-07
+  linearVelocity 0.11802176877020283 -0.11168278862405445 1.9925106897744716e-06
+  angularVelocity 0.00010377081900356048 9.207251312139601e-05 -1.2528617528761266e-05
 }
