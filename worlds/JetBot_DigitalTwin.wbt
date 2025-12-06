@@ -3,23 +3,33 @@
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/balls/protos/Ball.proto"
 
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.01202692142043798 -0.9985407867332297 -0.05264646608585914 5.506065514674408
-  position -0.3510857293721705 0.015900039983473356 0.3923013681618275
+  orientation 0.14565134932952725 -0.11978958769458949 -0.9820570956509853 4.455502451456638
+  position 3.9457715943896243 -11.090312791986024 3.773855800341779
 }
 TexturedBackground {
 }
 TexturedBackgroundLight {
 }
 RectangleArena {
+  floorSize 2 2
   wallHeight 0.2
 }
+Ball {
+  hidden linearVelocity_0 0.060879487109817866 0.11567952086030617 0.00010677895287375315
+  hidden angularVelocity_0 -1.1491603243346962 0.6047640722735275 0.013887152443398294
+  translation 0.6775461127885727 0.5606024396621461 0.09991331967045734
+  rotation 0.7085095040042511 -0.5622751357266139 0.4264515851527204 -1.5653530496600272
+  color 1 0 0
+  radius 0.1
+}
 Robot {
-  translation -0.09268744235460125 -0.007425411167419894 -0.0004528651591661978
-  rotation 6.379808322758485e-05 8.078137153159771e-05 0.9999999947020872 -3.054414322756615
+  translation 0.5461877451151531 0.4339204064983282 -0.0004393612897624147
+  rotation 1.3840115405314456e-05 -2.2868999516891464e-06 0.9999999999016105 1.0548545142336678
   children [
     Solid {
       translation 0 0 0.045
@@ -331,7 +341,7 @@ Robot {
     }
     HingeJoint {
       jointParameters HingeJointParameters {
-        position 751.3060091364416
+        position 917.5938204756893
         axis 0 1 0
         anchor 0 0.07 0.0325
       }
@@ -347,7 +357,7 @@ Robot {
       ]
       endPoint Solid {
         translation 0 0.075 0.0325
-        rotation 0.16526259662596357 -0.6973824995197808 0.6973850611534399 2.8140293455090006
+        rotation 0.9847252371027306 0.12311802478785026 -0.12311847702643733 1.586192015591222
         children [
           Shape {
             appearance PBRAppearance {
@@ -395,13 +405,13 @@ Robot {
           density -1
           mass 0.06
         }
-        linearVelocity -0.16189962324265075 -0.014172964758713895 1.6940418171374512e-05
-        angularVelocity 0.43687734392175387 -4.981929707973617 0.0009616330817035158
+        linearVelocity 0.06259008892026435 0.11013699873298566 2.328464861514874e-07
+        angularVelocity -3.4017782208588443 1.933173335281985 0.038638362400278584
       }
     }
     HingeJoint {
       jointParameters HingeJointParameters {
-        position 567.9283547127092
+        position 843.1092810726656
         axis 0 1 0
         anchor 0 -0.07 0.0325
       }
@@ -417,7 +427,7 @@ Robot {
       ]
       endPoint Solid {
         translation 0 -0.075 0.0325
-        rotation 0.24989278121941913 0.6846715103127075 -0.6846740252562088 2.6518388839242095
+        rotation 0.7326280163245985 0.4812766813701272 -0.48127844920133367 1.8770161143043131
         children [
           Shape {
             appearance PBRAppearance {
@@ -465,8 +475,8 @@ Robot {
           density -1
           mass 0.06
         }
-        linearVelocity -0.1618983491469177 -0.014196721980877252 0.00020229929780066338
-        angularVelocity 0.4368808170873311 -4.981929456792713 0.0009598699735893198
+        linearVelocity 0.06538623346915459 0.11506039595214253 -2.175589108570176e-07
+        angularVelocity -3.5535611484365073 2.019469105122522 0.03868566686181882
       }
     }
     Solid {
@@ -552,6 +562,6 @@ Robot {
     ]
   }
   controller "robot_test"
-  linearVelocity -0.16191596748211418 -0.0142083202377667 0.00010563086480303068
-  angularVelocity 0.0012870330104065913 -0.0009408547682116558 -0.00016772726586217882
+  linearVelocity 0.06398829547522993 0.11259878554277471 -1.179990558824934e-08
+  angularVelocity -2.581751728195811e-06 5.467891436850045e-06 0.0377532198794394
 }
