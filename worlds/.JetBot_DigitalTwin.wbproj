@@ -6,6 +6,5 @@ maximizedDockId: -1
 centralWidgetVisible: 1
 orthographicViewHeight: 1
 textFiles: 0 "controllers/robot_test/robot_test.py"
-globalOptionalRendering: LidarRaysPaths::LidarPointClouds::CameraFrustums
 consoles: Console:All:All
-renderingDevicePerspectives: JetBot:camera;1;0.598437;0;0
+renderingDevicePerspectives: JetBot:camera;1;0.425781;0;0
